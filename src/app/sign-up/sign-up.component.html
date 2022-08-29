@@ -1,0 +1,105 @@
+<div class="signup-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Signup</mat-card-title>
+    </mat-card-header>
+    <form class="signup-form" [formGroup]="signupForm" (submit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field class="signup-full-width">
+          <input
+            matInput
+            placeholder="First Name"
+            formControlName="firstName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="signupForm.get('firstName')?.hasError('required')">
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="signup-full-width">
+          <input
+            matInput
+            placeholder="Last Name"
+            formControlName="lastName"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="signupForm.get('lastName')?.hasError('required')">
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="signup-full-width">
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-error
+            *ngIf="
+              (signupForm.get('email')?.hasError('email') ||
+                signupForm
+                  .get('email')
+                  ?.hasError('incorrectEmailDomainName')) &&
+              !signupForm.get('email')?.hasError('required')
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="signup-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-error
+            *ngIf="
+              signupForm.get('password')?.hasError('minlength') &&
+              !signupForm.get('password')?.hasError('required')
+            "
+          >
+            Password must be at least 8 characters long.
+          </mat-error>
+          <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              signupForm.get('password')?.hasError('mustContainUppercase') &&
+              !signupForm.get('password')?.hasError('required')
+            "
+          >
+            Password must contain at least one uppercase letter
+          </mat-error>
+          <mat-error
+            *ngIf="
+              signupForm.get('password')?.hasError('mustContainLowercase') &&
+              !signupForm.get('password')?.hasError('required')
+            "
+          >
+            Password must contain at least one lowercase letter
+          </mat-error>
+        </mat-form-field>
+        <mat-error
+          *ngIf="signupForm.errors?.['namesInPassword'] && (signupForm.touched || signupForm.dirty)"
+        >
+          Password cannot contain first or last names
+        </mat-error>
+      </mat-card-content>
+
+      <button
+        mat-stroked-button
+        color="accent"
+        class="btn-block"
+        [disabled]="!signupForm.valid"
+      >
+        Register
+      </button>
+    </form>
+  </mat-card>
+</div>
