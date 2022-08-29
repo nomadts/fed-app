@@ -17,6 +17,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+P.S.: Unit tests are implemented only for `./src/app/shared/must-contain-uppercase.directive.spec.ts` to demonstrate abilities. As I didn't have time to cover everythin with unit tests.
 
 ## Running end-to-end tests
 
